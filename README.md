@@ -7,7 +7,7 @@ The mathbirthdays.com site is very simple. There is a way to select your birth d
 
 
 
-You can watch it online here: https://jsfiddle.net/chpneda93/xtncuo95/3/
+You can watch it online here:https://jsfiddle.net/chpneda93/a5sn4uej/
 
 Install instructions
 
