@@ -22,17 +22,21 @@
 
 <body>
     <div class="mathBirthday">
-        <h1>My Math Birthday!</h1>
+        <h1 class="title">My Math Birthday!</h1>
         <div class="container ">
             <div class="input-group date d-flex justify-content-center">
                 <input type="text" class="form-control rounded-pill" placeholder="Select your birth date" id=birthDate><span class="input-group-addon"><i class="glyphicon glyphicon-th fas fa-calendar-alt"></i></span>
             </div>
             <div class="d-flex justify-content-center" style="margin: 2rem auto 3rem auto">
-                <button class="btn rounded-pill">Calculate</button>
+                <button class="my-btn btn-danger rounded-pill">Calculate</button>
             </div>
             <div id="result"></div>
         </div>
     </div>
+    <footer>
+        <a class="links" href="https://jsfiddle.net/chpneda93/xtncuo95/3/">Check out online</a>
+        <a class="links" href="https://github.com/Chpineda93/myMathBirthday">Source code</a>
+    </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -48,10 +52,10 @@
                 autoclose: true,
             });
 
-            $('.btn').click(function() {
+            $('.my-btn').click(function() {
                 const birthdayText = $('#birthDate').val();
                 const myBirthday = getBirthdayFormat(birthdayText); //pasing the string to date format
-                $("#result").append('<div><h4>' + getMyMathBirthday(myBirthday) + '</h4></div>');
+                $("#result").append('<h4 class="resultMessage">' + getMyMathBirthday(myBirthday) + '</h4>');
 
             })
 
@@ -94,22 +98,24 @@
 <style>
     body {
         background-image: url("https://cutewallpaper.org/21/chalk-board-wallpapers/black-board-Magdalene-project.org.jpg");
-        font-family: 'Averia Serif Libre', cursive;
     }
     
-    h1,
+    .title,
     .fa-calendar-alt,
-    .btn,
-    .btn:hover,
-    h4 {
+    .my-btn,
+    .my-btn:hover,
+    .resultMessage,
+    .links {
         color: #ffffff;
     }
     
     .mathBirthday {
         margin: 8rem 5rem 2rem 5rem;
+        padding-bottom: 3rem;
+        font-family: 'Averia Serif Libre', cursive;
     }
     
-    h1 {
+    .title {
         font-family: 'Fredoka One', cursive;
         text-align: center;
         margin-bottom: 6rem;
@@ -118,7 +124,7 @@
     
     .date {
         display: flex;
-        margin: 1rem auto 1rem auto;
+        margin: 1rem auto 3rem auto;
     }
     
     span {
@@ -129,49 +135,82 @@
         font-size: 2.4rem;
     }
     
-    .fa-calendar-alt:hover {
+    .fa-calendar-alt:hover,
+    .links:hover {
         color: #eb4559;
+        text-decoration: none;
     }
     
-    .btn {
+    .my-btn {
         background-color: #d92027;
         padding: 1rem 1.5rem;
     }
     
-    .btn:hover {
+    .my-btn:hover {
         background-color: #eb4559;
     }
     
-    h4 {
+    #result {
+        height: 4rem;
+    }
+    
+    .resultMessage {
         text-align: center;
         font-size: 2rem;
     }
     
-    @media (min-width:900px) {
+    footer {
+        text-align: center;
+        margin: 10rem auto 6rem auto;
+    }
+    
+    .links {
+        display: inline-flex;
+        margin: auto 4rem auto 4rem;
+        font-family: 'Averia Serif Libre', cursive;
+    }
+    
+    @media (min-width:1000px) {
         .date {
             width: 35rem;
         }
     }
     
-    @media (max-width: 360px) {
+    @media (max-width: 500px) {
         .mathBirthday {
             margin-top: 3rem;
         }
-        h1 {
+        .title {
             margin-bottom: 3rem;
             font-size: 2rem;
         }
         .date {
             margin-top: 6rem;
-            padding-right: 4rem;
             width: 13.5rem;
         }
         .btn {
             margin-top: 2rem;
             padding: 0.5rem 1rem;
         }
-        h4 {
+        .resultMessage {
+            font-size: 1.2rem;
+        }
+        footer {
+            margin: 5rem auto 4rem auto;
+        }
+    }
+    
+    @media (max-width: 320px) {
+        .date {
+            margin-top: 6rem;
+            padding-right: 4rem;
+            width: 13.5rem;
+        }
+        .resultMessage {
             font-size: medium;
+        }
+        footer {
+            margin: 4rem auto 4rem auto;
         }
     }
 </style>

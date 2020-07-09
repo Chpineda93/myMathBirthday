@@ -5,20 +5,9 @@ mathbirthdays.com is a site that wants to help people celebrate their special "m
 
 The mathbirthdays.com site is very simple. There is a way to select your birth date, and the page shows your next upcoming math birthday. For example, if your birth date was 3 days ago, it would say "Your next math birthday is your 10-day-old birthday on X date," where X date is a week from now. The site is a single html file with no assets. All css and javascript is inline or hosted in publicly accessible locations elsewhere (like jquery or other frameworks).
 
-For the challenge
 
-1. Design and implement the birth date selector that is easy and intuitive with minimal unnecessary clicks, and works on large and small screens (responsive and touch friendly). Please include a screenshot or photo of 3 different design ideas (wireframes) that you considered.
 
-2. Design and implement the javascript to calculate and display the next math birthday date message below the date selector. Please remember, the site should be a single page application, with a link to view it live hosted on something like jsfiddle or github.io or wherever, and a link to the source code
-
-Feel free to use any libraries or frameworks for the birth date picker or date calculations or anything else you want.
-
-In this challenge, you will be judged on: 
-0. Accuracy in following the challenge instructions
-1. Responsiveness of the design
-2. Usability and aesthetics of the design
-
-You can viw it online here: https://jsfiddle.net/chpneda93/L4eu2o5q/
+You can watch it online here: https://jsfiddle.net/chpneda93/xtncuo95/3/
 
 Install instructions
 
