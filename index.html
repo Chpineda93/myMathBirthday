@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css" integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g==" crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css" integrity="sha512-p4vIrJ1mDmOVghNMM4YsWxm0ELMJ/T0IkdEvrkNHIcgFsSzDi/fV7YxzTzb3mnMvFPawuIyIrHcpxClauEfpQg==" crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <title>My Math Birthday</title>
+</head>
+
+<body>
+    <div class="mathBirthday">
+        <h1>My Math Birthday!</h1>
+        <div class="container ">
+            <div class="input-group date d-flex justify-content-center">
+                <input type="text" class="form-control rounded-pill" placeholder="Select your birth date" id=birthDate><span class="input-group-addon"><i class="glyphicon glyphicon-th fas fa-calendar-alt"></i></span>
+            </div>
+            <div class="d-flex justify-content-center" style="margin: 2rem auto 3rem auto">
+                <button class="btn rounded-pill">Calculate</button>
+            </div>
+            <div id="result"></div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('.date').datepicker({
+                format: "yyyy/mm/dd",
+                startView: 2,
+                multidate: false,
+                autoclose: true,
+            });
+
+            $('.btn').click(function() {
+                const birthdayText = $('#birthDate').val();
+                const myBirthday = getBirthdayFormat(birthdayText); //pasing the string to date format
+                $("#result").append('<div><h4>' + getMyMathBirthday(myBirthday) + '</h4></div>');
+
+            })
+
+            function getBirthdayFormat(stringDate) {
+                const year = parseInt(stringDate.substring(0, 4));
+                const month = parseInt(stringDate.substring(5, 7)) - 1; //month is 0-indexed
+                const day = parseInt(stringDate.substring(8));
+                const birthDateFormat = new Date(year, month, day);
+
+                return birthDateFormat;
+            }
+
+            function getMyMathBirthday(myBirthday) {
+                $('#result').empty();
+                // days difference between 2 dates
+                const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                const myNextMathBirthday = new Date(new Date().setHours(0, 0, 0)); //initial value, current date
+
+                const daysPassed = (myBirthday - myNextMathBirthday) / oneDay;
+
+                if (!(isNaN(daysPassed))) {
+                    if (daysPassed > 0) {
+                        return ('This is a future date, please search your Birthday');
+                    } else {
+                        const diffDays = Math.round(Math.abs(daysPassed));
+
+                        //calculating  math birthday
+                        const digitCounter = diffDays.toString().length;
+                        const daysToMyMathBirthday = (Math.pow(10, digitCounter)) - diffDays;
+                        myNextMathBirthday.setDate(myNextMathBirthday.getDate() + daysToMyMathBirthday);
+                        return ('Your Math Birthday number ' + digitCounter + ' will be at ' + +myNextMathBirthday.getFullYear() + '/' + (myNextMathBirthday.getMonth() + 1) + '/' + myNextMathBirthday.getDate() + '. So ' + daysToMyMathBirthday + ' days left!!!');
+                    }
+                } else {
+                    return ('Your Birthday has not been specified');
+                }
+            }
+        })
+    </script>
+</body>
+<style>
+    body {
+        background-image: url("https://cutewallpaper.org/21/chalk-board-wallpapers/black-board-Magdalene-project.org.jpg");
+        font-family: 'Averia Serif Libre', cursive;
+    }
+    
+    h1,
+    .fa-calendar-alt,
+    .btn,
+    .btn:hover,
+    h4 {
+        color: #ffffff;
+    }
+    
+    .mathBirthday {
+        margin: 8rem 5rem 2rem 5rem;
+    }
+    
+    h1 {
+        font-family: 'Fredoka One', cursive;
+        text-align: center;
+        margin-bottom: 6rem;
+        letter-spacing: 5px;
+    }
+    
+    .date {
+        display: flex;
+        margin: 1rem auto 1rem auto;
+    }
+    
+    span {
+        margin-left: 0.5rem;
+    }
+    
+    .fa-calendar-alt {
+        font-size: 2.4rem;
+    }
+    
+    .fa-calendar-alt:hover {
+        color: #eb4559;
+    }
+    
+    .btn {
+        background-color: #d92027;
+        padding: 1rem 1.5rem;
+    }
+    
+    .btn:hover {
+        background-color: #eb4559;
+    }
+    
+    h4 {
+        text-align: center;
+        font-size: 2rem;
+    }
+    
+    @media (min-width:900px) {
+        .date {
+            width: 35rem;
+        }
+    }
+    
+    @media (max-width: 360px) {
+        .mathBirthday {
+            margin-top: 3rem;
+        }
+        h1 {
+            margin-bottom: 3rem;
+            font-size: 2rem;
+        }
+        .date {
+            margin-top: 6rem;
+            padding-right: 4rem;
+            width: 13.5rem;
+        }
+        .btn {
+            margin-top: 2rem;
+            padding: 0.5rem 1rem;
+        }
+        h4 {
+            font-size: medium;
+        }
+    }
+</style>
+
+</html>
